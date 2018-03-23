@@ -1,4 +1,4 @@
-###Usage
+### Usage
 ```sh
 mussh [OPTIONS] <-h host.. | -H hostfile> [-c cmd] [-C scriptfile]
 mussh --help        for full help text"
@@ -6,7 +6,7 @@ mussh --help        for full help text"
 Send a command or list of commands to multiple hosts.
 ```
 
-###OPTIONS
+### OPTIONS
 
 ```sh
 --help          This text.
@@ -38,7 +38,7 @@ skip hosts where keys fail.
 -V              Print version info and exit.
 ```
 
-###PROXY ARGS
+### PROXY ARGS
 
 ```sh
         -p [user@]<host>
@@ -46,7 +46,7 @@ skip hosts where keys fail.
         -po <ssh-args>        Args to pass to ssh on proxy with -o option.
 ```
 
-###HOST ARGS
+### HOST ARGS
 
 ```sh
         -h [user@]<host> [[user@]<host> ..]
@@ -58,7 +58,7 @@ skip hosts where keys fail.
                         \"#\" for comments.
 ```
 
-###COMMAND ARGS
+### COMMAND ARGS
 
 ```sh
 If neither is specified, commands will be read from standard input.
@@ -72,7 +72,7 @@ If neither is specified, commands will be read from standard input.
 ```
 At least one host is required.  Arguments are in no particular order.
 
-###EXAMPLES
+### EXAMPLES
 
 ```sh
 mussh -H ./linuxhosts -C spfiles/testscript.sh
