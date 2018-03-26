@@ -148,9 +148,8 @@ ssh_connect() {
 	    done
 }
 
-##############################
-# FUNCTIONS FOR FORKED PROCS #
-##############################
+## FUNCTIONS FOR FORKED PROCS
+
 set_hostlist() {
 # Create a hostlist file.
 	[ "$DEBUG" -ge 2 ] && echo "DEBUG: BUILDING HOST LIST FILE $TEMP_DIR/hostlist" 1>&2
@@ -169,8 +168,7 @@ get_next_host() {
 			break
 		fi
 		[ "$DEBUG" -ge 2 ] && echo "DEBUG[#$CHILDNUM]: hostlist file already locked.  Sleep..." 1>&2
-		#usleep 1000
-		sleep 1
+		sleep 0.25
 	done
 	[ "$DEBUG" -ge 2 ] && echo "DEBUG[#$CHILDNUM]: Locked hostfile." 1>&2
 
@@ -466,7 +464,7 @@ $HOSTLIST"
                                 echo "mussh: Host file '$HOSTFILE' does not exist!" 1>&2
                                 exit 1
                         fi
-                        HOSTLIST="$(cat $HOSTFILE | sed -e 's/#.*//' | egrep -v "^ *$" )
+                        HOSTLIST="$(cat $HOSTFILE | sed -e 's/#.*//' | egrep -v \"^ *$\" )
 $HOSTLIST"
                         shift
                 done
@@ -538,9 +536,9 @@ if [ "$HOSTLIST" = "" ] ; then
         exit 1
 fi
 
-###################################
-# DEFAULT TO STDIN IF NO COMMANDS #
-###################################
+
+## DEFAULT TO STDIN IF NO COMMANDS
+
 if [ "$THESCRIPT" = "" ] ; then
         echo "Enter your script here.  End with single \".\" or EOF." 1>&2
         while read THISLINE
@@ -597,11 +595,7 @@ else
         start_agent 
         load_keys "$IDENT"
 fi
-#echo
 
-###################
-# CREATE TEMP DIR #
-###################
 create_temp
 
 ########################
@@ -613,16 +607,6 @@ fi
 
 if [ "$PROXY" != "" ] ; then
         proxy_connect
-
-# Don't background process when we're only doing one at a time
-#elif [ -z "$CONCURRENT" -o "$CONCURRENT" = 1 ] ; then
-#        set $HOSTLIST
-#        while [ "$1" != "" ] ; do
-#                HOST="$1"
-#                [ "$DEBUG" -ge 1 ] && echo "DEBUG: CONNECT $HOST" 1>&2
-#		shift
-#		ssh_connect 
-#	done
 else
 # Fork $CONCURRENT children
 	set_hostlist
